@@ -22,12 +22,9 @@ public class CardService {
 
     private final CardRepository repository;
 
-    private final JwtTokenFilter filter;
-
     @Autowired
-    public CardService(CardRepository repository, JwtTokenFilter filter) {
+    public CardService(CardRepository repository) {
         this.repository = repository;
-        this.filter = filter;
     }
 
     public ResponseEntity<?> getAll() {
