@@ -34,7 +34,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@Valid @RequestBody LoginDTO dto, BindingResult result) {
-        if (result.hasErrors()) return new ResponseEntity<>("__BAD__", HttpStatus.BAD_REQUEST);
+        if (result.hasErrors()) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         try {
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword());
             Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
@@ -42,7 +42,7 @@ public class AuthController {
             String jwt = jwtProvider.generateToken(authentication);
             return new ResponseEntity<>(jwt, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Revise sus credenciales", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Parol yoki username xato kiritildi", HttpStatus.UNAUTHORIZED);
         }
     }
 }

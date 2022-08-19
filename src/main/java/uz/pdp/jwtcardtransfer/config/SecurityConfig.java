@@ -37,7 +37,7 @@ public class SecurityConfig {
         http.
                 csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/auth/login").permitAll()
+                .antMatchers("/api/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
